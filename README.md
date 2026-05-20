@@ -30,11 +30,11 @@
 
 ## Archivos Excel
 
-- [Atributos de Calidad](docs/excel/Atributos-de-Calidad.xlsx)
-- [Documentación Arquetipo y Arquitectura de Referencia](docs/excel/Documentacion-Arquetipo-y-Arquitectura-de-Referencia.xlsx)
-- [Escenarios de calidad](docs/excel/Escenarios-de-Calidad.xlsx)
-- [Funcionalidades Críticas](docs/excel/Funcionalidades-Criticas.xlsx)
-- [Mapa de Impacto](docs/excel/Mapa-de-Impacto.xlsx)
-- [Matriz de Tiempos del Sistema](docs/excel/Matriz-de-Tiempos-del-Sistema.xlsx)
-- [Restricciones de Negocio](docs/excel/Restricciones-de-Negocio.xlsx)
-- [Restricciones Técnicas](docs/excel/Restricciones-Técnicas.xlsx)
+- [Atributos de Calidad](docs/excel/Atributos de Calidad.xlsx)
+- [Documentación Arquetipo y Arquitectura de Referencia](docs/excel/Documentacion Arquetipo y Arquitectura de Referencia.xlsx)
+- [Escenarios de calidad](docs/excel/Escenarios de Calidad.xlsx)
+- [Funcionalidades Críticas](docs/excel/Funcionalidades Criticas.xlsx)
+- [Mapa de Impacto](docs/excel/Mapa de Impacto.xlsx)
+- [Matriz de Tiempos del Sistema](docs/excel/Matriz de Tiempos del Sistema.xlsx)
+- [Restricciones de Negocio](docs/excel/Restricciones de Negocio.xlsx)
+- [Restricciones Técnicas](docs/excel/Restricciones Técnicas.xlsx)
