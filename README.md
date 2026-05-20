@@ -38,3 +38,4 @@
 - [Matriz de Tiempos del Sistema](docs/excel/Matriz-de-Tiempos-del-Sistema.xlsx)
 - [Restricciones de Negocio](docs/excel/Restricciones-de-Negocio.xlsx)
 - [Restricciones Técnicas](docs/excel/Restricciones-Técnicas.xlsx)
+- [Tácticas y Estrategias](docs/excel/Tácticas-Estrategias-Arquitectónicas-ParKing.xlsx)
