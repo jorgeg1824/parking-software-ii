@@ -31,7 +31,7 @@
 ## Archivos Excel
 
 - [Atributos de Calidad](docs/excel/Atributos-de-Calidad.xlsx)
-- [Documentación Arquetipo y Arquitectura de Referencia](docs/excel/Documentacion-Arquetipo-y-Arquitectura-de-Referencia.xlsx)
+- [Documentación Arquetipo y Arquitectura de Referencia](docs/excel/Documentación-Arquetipo-y-Arquitectura-de-Referencia.xlsx)
 - [Escenarios de calidad](docs/excel/Escenarios-de-Calidad.xlsx)
 - [Funcionalidades Críticas](docs/excel/Funcionalidades-Criticas.xlsx)
 - [Mapa de Impacto](docs/excel/Mapa-de-Impacto.xlsx)
