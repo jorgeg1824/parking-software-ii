@@ -20,7 +20,7 @@
 
 ---
 
-## Diagrama de Componentes Frontend
+## Diagrama de Paquetes Frontend
 
 ![Frontend Components](docs/diagrams/frontend-package.png)
 
