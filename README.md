@@ -24,7 +24,7 @@
 
 El siguiente diagrama de secuencia muestra la interacción general de la arquitectura por capas anterior, con el fin de generar un entendimiento del flujo que se sigue por cada transacción que pueda involucrar o no retorno de datos.
 
-![Backend Components](docs/diagrams/backend-package.png)
+![Backend Components](docs/diagrams/backend-sequence.png)
 
 ---
 
