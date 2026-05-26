@@ -88,20 +88,10 @@ public enum MessagesEnum {
         "Error inesperado",
         "Ocurrió un error inesperado en el servidor. Por favor contacte al administrador."
     ),
-    
-    TICKET_REQUEST_VEHICLE_ID_NULL(
-    	    "Vehículo requerido",
-    	    "El identificador del vehículo no puede ser nulo."
-    	),
 
     TICKET_REQUEST_CELL_ID_NULL(
     	    "Celda requerida",
     	    "El identificador de la celda no puede ser nulo."
-    	),
-    
-    VEHICLE_USECASE_VEHICLE_NOT_FOUND(
-    	    "Vehículo no encontrado",
-    	    "No existe un vehículo registrado con el identificador proporcionado."
     	),
 
     VEHICLE_USECASE_CELL_NOT_FOUND(
@@ -113,16 +103,36 @@ public enum MessagesEnum {
     	    "Celda no disponible",
     	    "La celda seleccionada ya se encuentra ocupada."
     	),
-    
-    TICKET_DOMAIN_VEHICLE_ID_NULL(
-    	    "Invariante de dominio: vehículo",
-    	    "El identificador del vehículo no puede ser nulo en la entidad de dominio."
-    	),
 
     TICKET_DOMAIN_CELL_ID_NULL(
     	    "Invariante de dominio: celda",
     	    "El identificador de la celda no puede ser nulo en la entidad de dominio."
-    	);
+    	), 
+
+    TICKET_REQUEST_LICENSE_PLATE_NULL(
+        "Placa requerida",
+        "La placa del vehículo no puede estar vacía."
+    ),
+
+    TICKET_REQUEST_LICENSE_PLATE_INVALID(
+        "Placa inválida",
+        "La placa solo puede contener letras, números y guiones."
+    ),
+
+    TICKET_REQUEST_VEHICLE_TYPE_NULL(
+        "Tipo de vehículo requerido",
+        "El identificador del tipo de vehículo no puede ser nulo."
+    ),
+
+    TICKET_DOMAIN_LICENSE_PLATE_NULL(
+        "Invariante de dominio: placa",
+        "La placa del vehículo no puede ser nula o vacía en la entidad de dominio."
+    ),
+
+    TICKET_DOMAIN_VEHICLE_TYPE_NULL(
+        "Invariante de dominio: tipo de vehículo",
+        "El tipo de vehículo no puede ser nulo en la entidad de dominio."
+    );
  
     private String title;
     private String content;

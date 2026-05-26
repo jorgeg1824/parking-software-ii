@@ -14,10 +14,9 @@ import com.parking.infrastructure.persistence.repository.entity.CellEntity;
 import com.parking.infrastructure.persistence.repository.entity.CellVehicleEntity;
 import com.parking.infrastructure.persistence.repository.entity.TicketEntity;
 import com.parking.infrastructure.persistence.repository.entity.VehicleEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
-
-import org.springframework.stereotype.Component;
 
 @Component
 public class AddVehicleUseCaseImpl implements AddVehicleUseCase {
@@ -35,12 +34,10 @@ public class AddVehicleUseCaseImpl implements AddVehicleUseCase {
             final CellVehicleRepository cellVehicleRepository,
             final AddVehicleEntityMapper mapper) {
 
-        if (ticketRepository == null) {
+        if (ticketRepository == null)
             throw new BusinessException(MessagesEnum.VEHICLE_USECASE_REPOSITORY_NULL);
-        }
-        if (mapper == null) {
+        if (mapper == null)
             throw new BusinessException(MessagesEnum.VEHICLE_USECASE_MAPPER_NULL);
-        }
 
         this.ticketRepository = ticketRepository;
         this.vehicleRepository = vehicleRepository;
@@ -53,12 +50,14 @@ public class AddVehicleUseCaseImpl implements AddVehicleUseCase {
     public AddVehicleResponseDTO execute(final AddVehicleDomain data) {
 
         validateDataNotNull(data);
-        validateVehicleExists(data.getVehicleId());
-        validateCellExists(data.getCellId());
-        validateVehicleNotAlreadyInside(data.getVehicleId()); 
-        validateCellAvailable(data.getCellId());      
 
-        CellVehicleEntity cellVehicle = mapper.toCellVehicleEntity(data);
+        UUID vehicleId = findOrCreateVehicle(data);
+
+        validateCellExists(data.getCellId());
+        validateVehicleNotAlreadyInside(vehicleId);
+        validateCellAvailable(data.getCellId());
+
+        CellVehicleEntity cellVehicle = mapper.toCellVehicleEntity(data, vehicleId);
         CellVehicleEntity savedCellVehicle = cellVehicleRepository.save(cellVehicle);
 
         TicketEntity ticket = mapper.toTicketEntity(data, savedCellVehicle);
@@ -68,35 +67,36 @@ public class AddVehicleUseCaseImpl implements AddVehicleUseCase {
     }
 
     private void validateDataNotNull(final AddVehicleDomain data) {
-        if (data == null) {
+        if (data == null)
             throw new BusinessException(MessagesEnum.VEHICLE_USECASE_NULL_DATA);
-        }
     }
 
-    private void validateVehicleExists(final UUID vehicleId) {
-        VehicleEntity vehicle = vehicleRepository.findById(vehicleId);
-        if (vehicle == null) {
-            throw new BusinessException(MessagesEnum.VEHICLE_USECASE_VEHICLE_NOT_FOUND);
-        }
+    private UUID findOrCreateVehicle(final AddVehicleDomain data) {
+        return vehicleRepository
+                .findByLicensePlate(data.getLicensePlate())
+                .map(VehicleEntity::getId)
+                .orElseGet(() -> {
+                    VehicleEntity newVehicle = new VehicleEntity();
+                    newVehicle.setLicensePlate(data.getLicensePlate());
+                    newVehicle.setVehicleTypeId(data.getVehicleTypeId());
+                    return vehicleRepository.save(newVehicle).getId();
+                });
     }
 
     private void validateCellExists(final UUID cellId) {
         CellEntity cell = cellRepository.findById(cellId);
-        if (cell == null) {
+        if (cell == null)
             throw new BusinessException(MessagesEnum.VEHICLE_USECASE_CELL_NOT_FOUND);
-        }
     }
 
     private void validateCellAvailable(final UUID cellId) {
-        if (ticketRepository.hasOpenTicketByCellId(cellId)) {
+        if (ticketRepository.hasOpenTicketByCellId(cellId))
             throw new BusinessException(MessagesEnum.VEHICLE_USECASE_CELL_UNAVAILABLE);
-        }
     }
 
     private void validateVehicleNotAlreadyInside(final UUID vehicleId) {
-        if (ticketRepository.hasOpenTicketByVehicleId(vehicleId)) {
+        if (ticketRepository.hasOpenTicketByVehicleId(vehicleId))
             throw new BusinessException(MessagesEnum.VEHICLE_USECASE_ALREADY_INSIDE);
-        }
     }
 
     private AddVehicleResponseDTO buildResponse(final TicketEntity ticket,

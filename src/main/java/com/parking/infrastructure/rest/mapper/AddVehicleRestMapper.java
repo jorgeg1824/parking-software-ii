@@ -14,7 +14,8 @@ public class AddVehicleRestMapper {
             null,
             request.getTicketNumber(),
             request.getEntryDate(),
-            request.getVehicleId(),
+            request.getLicensePlate(),    
+            request.getVehicleTypeId(),    
             request.getCellId(),
             request.getTicketStatus()
         );

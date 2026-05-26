@@ -1,7 +1,9 @@
 package com.parking.infrastructure.rest.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
@@ -16,8 +18,13 @@ public class AddVehicleRequest {
     @PastOrPresent(message = "TICKET_REQUEST_ENTRY_DATE_FUTURE")
     private LocalDateTime entryDate;
 
-    @NotNull(message = "TICKET_REQUEST_VEHICLE_ID_NULL")
-    private UUID vehicleId;
+    @NotBlank(message = "TICKET_REQUEST_LICENSE_PLATE_NULL")
+    @Pattern(regexp = "^[A-Za-z0-9-]+$",
+             message = "TICKET_REQUEST_LICENSE_PLATE_INVALID")
+    private String licensePlate;          
+
+    @NotNull(message = "TICKET_REQUEST_VEHICLE_TYPE_NULL")
+    private UUID vehicleTypeId;           
 
     @NotNull(message = "TICKET_REQUEST_CELL_ID_NULL")
     private UUID cellId;
@@ -25,22 +32,19 @@ public class AddVehicleRequest {
     @NotNull(message = "TICKET_REQUEST_STATUS_NULL")
     private UUID ticketStatus;
 
-    public AddVehicleRequest() {
-    	// Default constructor required by Jackson for JSON deserialization.
-    }
+    public AddVehicleRequest() {}
 
-    public int getTicketNumber() { return ticketNumber; }
-    public void setTicketNumber(final int ticketNumber) { this.ticketNumber = ticketNumber; }
-
+    public int getTicketNumber()        { return ticketNumber; }
     public LocalDateTime getEntryDate() { return entryDate; }
-    public void setEntryDate(final LocalDateTime entryDate) { this.entryDate = entryDate; }
+    public String getLicensePlate()     { return licensePlate; }
+    public UUID getVehicleTypeId()      { return vehicleTypeId; }
+    public UUID getCellId()             { return cellId; }
+    public UUID getTicketStatus()       { return ticketStatus; }
 
-    public UUID getVehicleId() { return vehicleId; }
-    public void setVehicleId(final UUID vehicleId) { this.vehicleId = vehicleId; }
-
-    public UUID getCellId() { return cellId; }
-    public void setCellId(final UUID cellId) { this.cellId = cellId; }
-
-    public UUID getTicketStatus() { return ticketStatus; }
-    public void setTicketStatus(final UUID ticketStatus) { this.ticketStatus = ticketStatus; }
+    public void setTicketNumber(int ticketNumber)           { this.ticketNumber = ticketNumber; }
+    public void setEntryDate(LocalDateTime entryDate)       { this.entryDate = entryDate; }
+    public void setLicensePlate(String licensePlate)        { this.licensePlate = licensePlate; }
+    public void setVehicleTypeId(UUID vehicleTypeId)        { this.vehicleTypeId = vehicleTypeId; }
+    public void setCellId(UUID cellId)                      { this.cellId = cellId; }
+    public void setTicketStatus(UUID ticketStatus)          { this.ticketStatus = ticketStatus; }
 }

@@ -1,12 +1,14 @@
 package com.parking.infrastructure.persistence.repository.adapter.sql.jpa;
 
+import com.parking.crosscuting.helper.UUIDHelper;
 import com.parking.infrastructure.persistence.repository.VehicleRepository;
 import com.parking.infrastructure.persistence.repository.entity.VehicleEntity;
 import com.parking.infrastructure.persistence.repository.mapper.VehiclePersistenceMapper;
 import com.parking.infrastructure.persistence.repository.sql.jpa.VehicleJPARepository;
+import com.parking.infrastructure.persistence.repository.sql.jpa.entity.VehicleJPAEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -28,33 +30,21 @@ public class VehicleJPARepositoryAdapter implements VehicleRepository {
                 .orElse(null);
     }
 
-	@Override
-	public void create(VehicleEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public Optional<VehicleEntity> findByLicensePlate(final String licensePlate) {
+        return repository.findByLicensePlate(licensePlate)
+                .map(mapper::toDomainEntity);
+    }
 
-	@Override
-	public void update(UUID id, VehicleEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public VehicleEntity save(final VehicleEntity vehicle) {
+        VehicleJPAEntity jpaEntity = mapper.toJPAEntity(vehicle);
 
-	@Override
-	public void delete(UUID id) {
-		// TODO Auto-generated method stub
-		
-	}
+        if (jpaEntity.getId().equals(UUIDHelper.getUUIDHelper().getDefault())) {
+            jpaEntity.setId(UUID.randomUUID());
+        }
 
-	@Override
-	public List<VehicleEntity> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<VehicleEntity> findByFilter(VehicleEntity filter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        VehicleJPAEntity saved = repository.save(jpaEntity);
+        return mapper.toDomainEntity(saved);
+    }
 }

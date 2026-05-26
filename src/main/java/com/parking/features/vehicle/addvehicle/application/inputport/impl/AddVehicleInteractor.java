@@ -24,7 +24,8 @@ public class AddVehicleInteractor implements AddVehicleInputPort {
                 data.getId(),
                 data.getTicketNumber(),
                 data.getEntryDate(),
-                data.getVehicleId(),
+                data.getLicensePlate(),      
+                data.getVehicleTypeId(),        
                 data.getCellId(),
                 data.getTicketStatus()
         );
