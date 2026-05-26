@@ -1,0 +1,29 @@
+# ── Compilados ───────────────────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+
+# ── IDE ──────────────────────────────────────────────────────────────────────
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+*.code-workspace
+
+# ── Variables de entorno y secretos ─────────────────────────────────────────
+# NUNCA subir credenciales al repositorio
+application-prod.yml
+application-local.yml
+.env
+.env.*
+!.env.example
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Sistema operativo ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
