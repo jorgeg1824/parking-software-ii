@@ -1,28 +1,18 @@
-# ── Compilados ───────────────────────────────────────────────────────────────
-target/
-*.class
-*.jar
-*.war
+# ── Dependencias ─────────────────────────────────────────────────────────────
+node_modules/
 
-# ── IDE ──────────────────────────────────────────────────────────────────────
-.idea/
-*.iml
-.classpath
-.project
-.settings/
-*.code-workspace
+# ── Build ────────────────────────────────────────────────────────────────────
+dist/
 
-# ── Variables de entorno y secretos ─────────────────────────────────────────
-# NUNCA subir credenciales al repositorio
-application-prod.yml
-application-local.yml
+# ── Variables de entorno ─────────────────────────────────────────────────────
 .env
 .env.*
 !.env.example
 
-# ── Logs ─────────────────────────────────────────────────────────────────────
-*.log
-logs/
+# ── IDE ──────────────────────────────────────────────────────────────────────
+.idea/
+*.code-workspace
+.vscode/
 
 # ── Sistema operativo ────────────────────────────────────────────────────────
 .DS_Store
