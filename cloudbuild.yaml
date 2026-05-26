@@ -50,7 +50,7 @@ steps:
     waitFor:
       - 'build-image'
 
-  # ── Paso 5: Deploy Cloud Run ──────────────────────────────
+# ── Paso 5: Deploy en Cloud Run con secretos ─────────────────────────────
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'deploy-cloud-run'
     entrypoint: 'gcloud'
@@ -62,9 +62,18 @@ steps:
       - '--region=us-central1'
       - '--platform=managed'
       - '--allow-unauthenticated'
-      - '--quiet'
-    waitFor:
-      - 'push-image'
+      - '--add-cloudsql-instances=$PROJECT_ID:us-central1:parking-db'
+      - '--set-secrets=DB_PASSWORD=DB_PASSWORD:latest'
+      - '--set-secrets=DB_USER=DB_USER:latest'
+      - '--set-secrets=DB_NAME=DB_NAME:latest'
+      - '--set-secrets=CLOUD_SQL_CONNECTION=CLOUD_SQL_CONNECTION:latest'
+      - '--set-secrets=CORS_ALLOWED_ORIGINS=CORS_ALLOWED_ORIGINS:latest'
+      - '--set-env-vars=SPRING_PROFILES_ACTIVE=prod'
+      - '--memory=512Mi'
+      - '--min-instances=0'
+      - '--max-instances=2'
+      - '--timeout=120'
+    waitFor: ['push-image']
 
 # ── Secretos ────────────────────────────────────────────────
 availableSecrets:
