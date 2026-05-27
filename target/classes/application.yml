@@ -21,6 +21,11 @@ spring:
     init:
       mode: always
 
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=200,expireAfterWrite=5m
+
 server:
   port: 8080
 
