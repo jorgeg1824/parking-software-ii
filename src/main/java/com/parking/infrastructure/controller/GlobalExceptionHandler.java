@@ -94,4 +94,10 @@ public class GlobalExceptionHandler {
             return MessagesEnum.GENERAL_UNEXPECTED_ERROR;
         }
     }
+    
+    @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+    public ResponseEntity<Void> handleNoResourceFound(
+            final org.springframework.web.servlet.resource.NoResourceFoundException ex) {
+        return ResponseEntity.notFound().build();
+    }
 }
